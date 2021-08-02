@@ -1,0 +1,22 @@
+CREATE TABLE car (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    model       TEXT ,
+    reg_number  TEXT ,
+    time_hired  TEXT);
+
+GetAllCars:
+    SELECT car.id,car.model,car.reg_number
+    FROM   car;
+
+InsertUser:
+    INSERT INTO car(model, reg_number, time_hired)
+    VALUES (?, ?, ?);
+
+UpdateUserName:
+    UPDATE car
+    SET model = ? , reg_number = ?, time_hired = ?
+    WHERE car.id = ?;
+
+DeleteContact:
+    DELETE FROM car
+    WHERE id = ?;

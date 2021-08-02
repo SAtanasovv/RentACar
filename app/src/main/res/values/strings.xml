@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RentACar</string>
+    <string name="no_cars_added">No cars are added yet!</string>
+    <string name="remove_car">Remove car</string>
+    <string name="hire_car">Hire car</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="model">Model</string>
+    <string name="reg_number">Registration Number</string>
+    <string name="please_enter_model">Please enter model</string>
+    <string name="please_enter_registration_number">Please enter registration Number</string>
+</resources>

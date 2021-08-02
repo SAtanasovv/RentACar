@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android           ="http://schemas.android.com/apk/res/android"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="wrap_content"
+    android:orientation     ="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                  ="@+id/carModelTxtInputLayout"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginStart  ="18dp"
+        android:layout_marginTop    ="16dp"
+        android:layout_marginEnd    ="18dp"
+        android:hint                ="@string/model">
+
+        <EditText
+            android:id              ="@+id/carModelEditText"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="wrap_content"
+            android:maxLines        ="1"
+            android:textSize        ="17sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                  ="@+id/regNumberLayout"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginStart  ="18dp"
+        android:layout_marginTop    ="18dp"
+        android:layout_marginEnd    ="18dp"
+        android:hint                ="@string/reg_number">
+
+        <EditText
+            android:id              ="@+id/regNumberEdit"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="wrap_content"
+            android:lines           ="1"
+            android:textSize        ="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RelativeLayout
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginTop    ="8dp"
+        android:layout_marginBottom ="8dp"
+        android:orientation         ="horizontal">
+
+        <Button
+            android:id                  ="@+id/addCarCancelButton"
+            android:layout_width        ="wrap_content"
+            android:layout_height       ="wrap_content"
+            android:layout_toStartOf    ="@+id/addCarAddButton"
+            android:text                ="@string/cancel"
+            android:textSize            ="14sp"/>
+
+        <Button
+            android:id                      ="@+id/addCarAddButton"
+            android:layout_width            ="wrap_content"
+            android:layout_height           ="wrap_content"
+            android:layout_alignParentEnd   ="true"
+            android:layout_marginStart      ="8dp"
+            android:layout_marginEnd        ="12dp"
+            android:text                    ="@string/add"
+            android:textSize                ="14sp"/>
+
+    </RelativeLayout>
+</LinearLayout>
