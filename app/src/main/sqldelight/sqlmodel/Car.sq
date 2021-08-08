@@ -1,0 +1,29 @@
+CREATE TABLE car (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    model           TEXT ,
+    reg_number      TEXT ,
+    time_to_rent    TEXT ,
+    current_time    TEXT ,
+    rented_till     TEXT);
+
+GetAllCars:
+    SELECT car.id,car.model,car.reg_number, time_to_rent, current_time, rented_till
+    FROM   car;
+
+GetCarById:
+    SELECT car.id,car.model,car.reg_number, time_to_rent, current_time, rented_till
+    FROM   car
+    WHERE  car.id = ?;
+
+InsertCarModel:
+    INSERT INTO car(model, reg_number)
+    VALUES (?, ?);
+
+UpdateCarModel:
+    UPDATE car
+    SET model = ? , reg_number = ?, time_to_rent = ?, current_time = ?, rented_till = ?
+    WHERE car.id = ?;
+
+DeleteCarModel:
+    DELETE FROM car
+    WHERE id = ?;

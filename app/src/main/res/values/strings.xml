@@ -3,10 +3,14 @@
     <string name="no_cars_added">No cars are added yet!</string>
     <string name="remove_car">Remove car</string>
     <string name="hire_car">Hire car</string>
-    <string name="add">Add</string>
+    <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="time_for_hire">For how long would you like to hire the vehicle</string>
     <string name="model">Model</string>
     <string name="reg_number">Registration Number</string>
     <string name="please_enter_model">Please enter model</string>
     <string name="please_enter_registration_number">Please enter registration Number</string>
+    <string name="insert_failed">Insert failed</string>
+    <string name="delete_failed">Delete failed</string>
+    <string name="update_failed">Update failed</string>
 </resources>
