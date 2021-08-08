@@ -27,21 +27,13 @@ class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<
             view?.setNoCarsAddedText(true)
         else{
             view?.setNoCarsAddedText(false)
-            if (isFirstSubscribe){
-                isFirstSubscribe = false
-                view?.setAdapter(carModelList)
-            }
-            else
-                view?.updateList(carModelList)
+            view?.updateList(carModelList)
         }
     }
 
     fun insertCar(carModel: CarModel){
         dataBaseQueries.insertCar(mainActivityViewContext as Context, carModel)
-        if (isFirstSubscribe)
-            view?.setAdapter(getCarList())
-        else
-            view?.updateList(getCarList())
+        view?.updateList(getCarList())
     }
 
     private fun getCarList() : ArrayList<CarModel>{

@@ -43,6 +43,7 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
 
     private fun init(){
         binding.addFloatingButtonMainActivity.setOnClickListener { showDialog(false) }
+        setCarAdapter(arrayListOf())
     }
 
     private fun setCarAdapter(carModelList: ArrayList<CarModel>){
