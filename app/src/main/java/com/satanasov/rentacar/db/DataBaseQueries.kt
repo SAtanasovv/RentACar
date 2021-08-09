@@ -28,6 +28,7 @@ class DataBaseQueries {
             database.carQueries.DeleteCarModel(id)
         }
     }
+
     fun updateCar(context: Context, carModel: CarModel) {
         val database = DataBaseCommunication.getDataBase(context)
         database.carQueries.transaction {

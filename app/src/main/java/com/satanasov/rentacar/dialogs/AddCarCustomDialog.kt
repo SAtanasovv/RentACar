@@ -74,7 +74,12 @@ class AddCarCustomDialog(context: Context) : Dialog(context) {
         }
         else{
             if (binding.minutesEditText.text.toString().isEmpty()) {
-                binding.minutesEditText.error = context.getString(R.string.please_enter_registration_number)
+                binding.minutesEditText.error = context.getString(R.string.please_enter_time)
+                valid = false
+            }
+
+            if (binding.minutesEditText.text.toString().isNotEmpty() && binding.minutesEditText.text.toString().toLong() == 0L) {
+                binding.minutesEditText.error = context.getString(R.string.please_enter_values_greater)
                 valid = false
             }
         }

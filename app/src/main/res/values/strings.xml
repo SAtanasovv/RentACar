@@ -5,12 +5,16 @@
     <string name="hire_car">Hire car</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
-    <string name="time_for_hire">For how long would you like to hire the vehicle</string>
+    <string name="time_for_hire">Hire vehicle (in minutes!)</string>
     <string name="model">Model</string>
     <string name="reg_number">Registration Number</string>
     <string name="please_enter_model">Please enter model</string>
     <string name="please_enter_registration_number">Please enter registration Number</string>
+    <string name="please_enter_time">Please enter the time (in minutes!)</string>
+    <string name="please_enter_values_greater">Please enter values greater than zero</string>
     <string name="insert_failed">Insert failed</string>
     <string name="delete_failed">Delete failed</string>
     <string name="update_failed">Update failed</string>
+    <string name="reg_number_colons">Plate:</string>
+    <string name="model_colons">Model:</string>
 </resources>

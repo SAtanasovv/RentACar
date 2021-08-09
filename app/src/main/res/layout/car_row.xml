@@ -7,23 +7,43 @@
     xmlns:tools             ="http://schemas.android.com/tools">
 
     <TextView
-        android:id                              ="@+id/modelTextView"
+        android:id                              ="@+id/modelTxt"
         android:layout_width                    ="wrap_content"
         android:layout_height                   ="wrap_content"
         android:layout_marginStart              ="16dp"
         android:layout_marginTop                ="24dp"
+        android:text                            ="@string/model_colons"
         app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintTop_toTopOf        ="parent" />
+
+    <TextView
+        android:id                              ="@+id/modelTextView"
+        android:layout_width                    ="wrap_content"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="8dp"
+        android:layout_marginTop                ="24dp"
+        app:layout_constraintStart_toEndOf      ="@id/modelTxt"
         app:layout_constraintTop_toTopOf        ="parent"
         tools:text                              ="Mercedes"/>
+
+    <TextView
+        android:id                              ="@+id/regNumberTet"
+        android:layout_width                    ="wrap_content"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="16dp"
+        android:layout_marginTop                ="16dp"
+        android:text                            ="@string/reg_number_colons"
+        app:layout_constraintTop_toBottomOf     ="@id/modelTextView"
+        app:layout_constraintStart_toStartOf    ="parent" />
 
     <TextView
         android:id                              ="@+id/regNumberTextView"
         android:layout_width                    ="wrap_content"
         android:layout_height                   ="wrap_content"
-        android:layout_marginStart              ="16dp"
+        android:layout_marginStart              ="8dp"
         android:layout_marginTop                ="16dp"
         app:layout_constraintTop_toBottomOf     ="@id/modelTextView"
-        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintStart_toEndOf      ="@id/regNumberTet"
         tools:text                              ="H1111HH"/>
 
     <Button

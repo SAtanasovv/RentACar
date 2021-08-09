@@ -3,8 +3,6 @@ package com.satanasov.rentacar.presenter
 import android.content.Context
 import com.satanasov.rentacar.db.DataBaseQueries
 import com.satanasov.rentacar.models.CarModel
-import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<MainActivityView>() {
@@ -23,12 +21,8 @@ class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<
         super.subscribe()
         carModelList = getCarList()
 
-        if (carModelList.isEmpty())
-            view?.setNoCarsAddedText(true)
-        else{
-            view?.setNoCarsAddedText(false)
+        if (carModelList.isNotEmpty())
             view?.updateList(carModelList)
-        }
     }
 
     fun insertCar(carModel: CarModel){
@@ -58,11 +52,7 @@ class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<
     }
 
     fun hireCar(carModel: CarModel){
-        val currHour        = TimeUnit.HOURS.toHours(carModel.currentTime!!)
-        val currMins        = TimeUnit.MINUTES.toMinutes(carModel.currentTime!!)
-        val now             = Calendar.getInstance()
-        now.add(Calendar.MINUTE, currMins.toInt())
-        carModel.rentedTill = now.timeInMillis
+        carModel.rentedTill = carModel.currentTime?.plus(carModel.timeToBeRentedFor!! * MILLISECONDS)
         dataBaseQueries.updateCar(mainActivityViewContext as Context, carModel)
         view?.updateList(getCarList())
     }
@@ -81,15 +71,16 @@ class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<
     }
 
     companion object{
-        var CAR_ID                      = 0
-        var CAR_MODEL                   = 1
-        var CAR_REGISTRATION_NUMBER     = 2
-        var CAR_TIME_TO_BE_RENTED_FOR   = 3
-        var CAR_CURRENT_TIME            = 4
-        var CAR_RENTED_TILL             = 5
+        const val CAR_ID                        = 0
+        const val CAR_MODEL                     = 1
+        const val CAR_REGISTRATION_NUMBER       = 2
+        const val CAR_TIME_TO_BE_RENTED_FOR     = 3
+        const val CAR_CURRENT_TIME              = 4
+        const val CAR_RENTED_TILL               = 5
+
+        const val MILLISECONDS                  = 60000
     }
 }
-
 interface MainActivityView {
     fun setAdapter(carModelList: ArrayList<CarModel>)
     fun updateList(carModelList: ArrayList<CarModel>)

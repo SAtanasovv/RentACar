@@ -2,6 +2,7 @@ package com.satanasov.rentacar.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.satanasov.rentacar.adapter.CarAdapter
 import com.satanasov.rentacar.adapter.CarAdapterClickListener
@@ -93,8 +94,18 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
     }
 
     override fun onHireClicked(adapterPosition: Int, carModel: CarModel) {
-        showDialog(true)
-        presenter.currentCarToHire = carModel
+        if(carModel.rentedTill != null && carModel.rentedTill!! != 0L && carModel.rentedTill!! > System.currentTimeMillis()){
+            val timeLeft    = carModel.rentedTill!! - System.currentTimeMillis()
+            val hours       = ((timeLeft/1000) / 60) / 60
+            val minutes     = ((timeLeft/1000) / 60) % 60
+            val seconds     = (timeLeft/1000) % 60
+
+            Toast.makeText(this, "Can be rented in $hours Hours $minutes minutes $seconds seconds", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            showDialog(true)
+            presenter.currentCarToHire = carModel
+        }
     }
 
     override fun onDeleteClicked(adapterPosition: Int) {
