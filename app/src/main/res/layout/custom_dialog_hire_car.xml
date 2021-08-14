@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android           ="http://schemas.android.com/apk/res/android"
+    xmlns:app               ="http://schemas.android.com/apk/res-auto"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="wrap_content">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id                              ="@+id/minutesTxtInputLayout"
+        android:layout_width                    ="match_parent"
+        android:layout_height                   ="wrap_content"
+        android:layout_marginStart              ="18dp"
+        android:layout_marginTop                ="16dp"
+        android:layout_marginEnd                ="18dp"
+        android:hint                            ="@string/time_for_hire"
+        android:maxLength                       ="5"
+        app:counterEnabled                      ="true"
+        app:counterMaxLength                    ="5"
+        app:layout_constraintTop_toTopOf        ="parent"
+        app:layout_constraintStart_toStartOf    ="parent"
+        app:layout_constraintEnd_toEndOf        ="parent">
+
+        <EditText
+            android:id              ="@+id/minutesEditText"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="wrap_content"
+            android:maxLines        ="1"
+            android:maxLength       ="5"
+            android:textSize        ="17sp"
+            android:inputType       ="number"
+            android:gravity         ="center" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id                          ="@+id/addCarCancelButton"
+        android:layout_width                ="wrap_content"
+        android:layout_height               ="wrap_content"
+        android:layout_toStartOf            ="@+id/addCarAddButton"
+        android:text                        ="@string/cancel"
+        android:textSize                    ="14sp"
+        android:layout_marginTop            ="8dp"
+        android:layout_marginBottom         ="8dp"
+        android:layout_marginEnd            ="12dp"
+        app:layout_constraintTop_toBottomOf ="@id/minutesTxtInputLayout"
+        app:layout_constraintEnd_toStartOf  ="@id/addCarAddButton"/>
+
+    <Button
+        android:id                          ="@+id/addCarAddButton"
+        android:layout_width                ="wrap_content"
+        android:layout_height               ="wrap_content"
+        android:layout_alignParentEnd       ="true"
+        android:layout_marginStart          ="8dp"
+        android:layout_marginEnd            ="12dp"
+        android:text                        ="@string/ok"
+        android:textSize                    ="14sp"
+        android:layout_marginTop            ="8dp"
+        android:layout_marginBottom         ="8dp"
+        app:layout_constraintEnd_toEndOf    ="parent"
+        app:layout_constraintTop_toBottomOf ="@id/minutesTxtInputLayout"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

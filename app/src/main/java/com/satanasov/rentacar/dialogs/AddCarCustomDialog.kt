@@ -2,7 +2,6 @@ package com.satanasov.rentacar.dialogs
 
 import android.app.Dialog
 import android.content.Context
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import com.satanasov.rentacar.R
@@ -13,7 +12,6 @@ class AddCarCustomDialog(context: Context) : Dialog(context) {
     private var dialogListener  : AddCarDialogListener? = null
 
     interface AddCarDialogListener{
-        fun onHireClicked(minutes: Long)
         fun onAddClicked(carModel: CarModel)
     }
 
@@ -21,7 +19,7 @@ class AddCarCustomDialog(context: Context) : Dialog(context) {
         dialogListener = listener
     }
 
-    fun showDialog(isForHire: Boolean){
+    fun showDialog(){
         try {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             val binding = CustomDialogAddCarBinding.inflate(layoutInflater)
@@ -33,56 +31,31 @@ class AddCarCustomDialog(context: Context) : Dialog(context) {
             }
 
             binding.addCarAddButton.setOnClickListener {
-                if( validate(binding, isForHire) ){
-                    if (isForHire)
-                        dialogListener?.onHireClicked(binding.minutesEditText.text.toString().toLong())
-                    else
-                        dialogListener?.onAddClicked(CarModel(carModel = binding.carModelEditText.text.toString(),registrationNumber = binding.regNumberEdit.text.toString()))
+                if( validate(binding) ){
+                    dialogListener?.onAddClicked(CarModel(carModel = binding.carModelEditText.text.toString(),registrationNumber = binding.regNumberEdit.text.toString()))
                     dismiss()
                 }
             }
 
-            if (isForHire){
-                binding.regNumberLayout.visibility          = View.GONE
-                binding.carModelTxtInputLayout.visibility   = View.GONE
-                binding.minutesTxtInputLayout.visibility    = View.VISIBLE
-            }
-            else{
-                binding.regNumberLayout.visibility          = View.VISIBLE
-                binding.carModelTxtInputLayout.visibility   = View.VISIBLE
-                binding.minutesTxtInputLayout.visibility    = View.GONE
-            }
             show()
         } catch (e: Exception){
             e.printStackTrace()
         }
     }
 
-    private fun validate(binding: CustomDialogAddCarBinding, isForHire: Boolean) : Boolean{
+    private fun validate(binding: CustomDialogAddCarBinding) : Boolean{
         var valid = true
 
-        if (!isForHire){
-            if (binding.carModelEditText.text.toString().isEmpty()) {
-                binding.carModelEditText.error = context.getString(R.string.please_enter_model)
-                valid = false
-            }
+         if (binding.carModelEditText.text.toString().isEmpty()) {
+             binding.carModelEditText.error = context.getString(R.string.please_enter_model)
+             valid = false
+         }
 
-            if (binding.regNumberEdit.text.toString().isEmpty()) {
-                binding.regNumberEdit.error = context.getString(R.string.please_enter_registration_number)
-                valid = false
-            }
-        }
-        else{
-            if (binding.minutesEditText.text.toString().isEmpty()) {
-                binding.minutesEditText.error = context.getString(R.string.please_enter_time)
-                valid = false
-            }
+         if (binding.regNumberEdit.text.toString().isEmpty()) {
+             binding.regNumberEdit.error = context.getString(R.string.please_enter_registration_number)
+             valid = false
+         }
 
-            if (binding.minutesEditText.text.toString().isNotEmpty() && binding.minutesEditText.text.toString().toLong() == 0L) {
-                binding.minutesEditText.error = context.getString(R.string.please_enter_values_greater)
-                valid = false
-            }
-        }
         return valid
     }
 }

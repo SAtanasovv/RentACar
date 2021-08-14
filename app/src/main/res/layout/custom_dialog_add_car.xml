@@ -7,31 +7,6 @@
     android:orientation     ="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id                  ="@+id/minutesTxtInputLayout"
-        android:layout_width        ="match_parent"
-        android:layout_height       ="wrap_content"
-        android:layout_marginStart  ="18dp"
-        android:layout_marginTop    ="16dp"
-        android:layout_marginEnd    ="18dp"
-        android:hint                ="@string/time_for_hire"
-        android:visibility          ="gone"
-        android:maxLength           ="5"
-        app:counterEnabled          ="true"
-        app:counterMaxLength        ="5">
-
-        <EditText
-            android:id              ="@+id/minutesEditText"
-            android:layout_width    ="match_parent"
-            android:layout_height   ="wrap_content"
-            android:maxLines        ="1"
-            android:maxLength       ="5"
-            android:textSize        ="17sp"
-            android:inputType       ="number"
-            android:gravity         ="center"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
         android:id                  ="@+id/carModelTxtInputLayout"
         android:layout_width        ="match_parent"
         android:layout_height       ="wrap_content"
@@ -102,4 +77,5 @@
             android:textSize                ="14sp"/>
 
     </RelativeLayout>
+
 </LinearLayout>

@@ -8,6 +8,7 @@ import com.satanasov.rentacar.adapter.CarAdapter
 import com.satanasov.rentacar.adapter.CarAdapterClickListener
 import com.satanasov.rentacar.databinding.ActivityMainBinding
 import com.satanasov.rentacar.dialogs.AddCarCustomDialog
+import com.satanasov.rentacar.dialogs.HireCarCustomDialog
 import com.satanasov.rentacar.models.CarModel
 import com.satanasov.rentacar.presenter.MainActivityPresenter
 import com.satanasov.rentacar.presenter.MainActivityView
@@ -15,7 +16,6 @@ import com.satanasov.rentacar.presenter.MainActivityView
 class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
 
     private lateinit var adapter    : CarAdapter
-    private lateinit var dialog     : AddCarCustomDialog
     private lateinit var binding    : ActivityMainBinding
     private lateinit var presenter  : MainActivityPresenter
 
@@ -43,7 +43,7 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
     }
 
     private fun init(){
-        binding.addFloatingButtonMainActivity.setOnClickListener { showDialog(false) }
+        binding.addFloatingButtonMainActivity.setOnClickListener { showAddCarDialogDialog() }
         setCarAdapter(arrayListOf())
     }
 
@@ -53,21 +53,27 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
         binding.recyclerViewMainActivity.adapter        = adapter
     }
 
-    private fun showDialog(isForHire: Boolean){
-        dialog = AddCarCustomDialog(this)
+    private fun showAddCarDialogDialog(){
+        val dialog = AddCarCustomDialog(this)
         dialog.setListener(object : AddCarCustomDialog.AddCarDialogListener {
+            override fun onAddClicked(carModel: CarModel) {
+                presenter.insertCar(carModel)
+            }
+        })
+        dialog.showDialog()
+    }
+
+    private fun showHireCarDialog(){
+        val dialog = HireCarCustomDialog(this)
+        dialog.setListener(object : HireCarCustomDialog.HireCarDialogListener{
             override fun onHireClicked(minutes: Long) {
                 var carModel                = presenter.currentCarToHire
                 carModel.timeToBeRentedFor  = minutes
                 carModel.currentTime        = System.currentTimeMillis()
                 presenter.hireCar(carModel)
             }
-
-            override fun onAddClicked(carModel: CarModel) {
-                presenter.insertCar(carModel)
-            }
         })
-        dialog.showDialog(isForHire)
+        dialog.showDialog()
     }
 
     override fun setAdapter(carModelList: ArrayList<CarModel>) {
@@ -103,7 +109,7 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
             Toast.makeText(this, "Can be rented in $hours Hours $minutes minutes $seconds seconds", Toast.LENGTH_SHORT).show()
         }
         else{
-            showDialog(true)
+            showHireCarDialog()
             presenter.currentCarToHire = carModel
         }
     }
