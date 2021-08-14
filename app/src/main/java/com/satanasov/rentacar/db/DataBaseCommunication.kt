@@ -5,7 +5,7 @@ import com.satanasov.rentacar.Database
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 
 object DataBaseCommunication {
-    private const val mDB_NAME     = "rentACar1.db"
+    private const val mDB_NAME     = "rentACar11.db"
 
     fun getDataBase(context: Context): Database {
         val driver = AndroidSqliteDriver(Database.Schema, context, mDB_NAME)

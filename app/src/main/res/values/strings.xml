@@ -17,4 +17,17 @@
     <string name="update_failed">Update failed</string>
     <string name="reg_number_colons">Plate:</string>
     <string name="model_colons">Model:</string>
+    <string name="username_colons">Username:</string>
+    <string name="password_colons">Password:</string>
+    <string name="register">Register</string>
+    <string name="register_underlined"><u>Register</u></string>
+    <string name="login">Login</string>
+    <string name="wrong_credentials">Wrong username or password</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="please_enter_username">Please enter username</string>
+    <string name="please_enter_characters">Please enter at least 5 characters </string>
+    <string name="user">User</string>
+    <string name="admin">Admin</string>
+    <string name="user_exist">Username already taken</string>
+    <string name="user_created">User created</string>
 </resources>

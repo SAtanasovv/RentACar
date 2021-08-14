@@ -1,12 +1,13 @@
 package com.satanasov.rentacar.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.satanasov.rentacar.databinding.CarRowBinding
 import com.satanasov.rentacar.models.CarModel
 
-class CarAdapter(private var carList: ArrayList<CarModel>, private val listener: CarAdapterClickListener) : RecyclerView.Adapter<CarAdapter.ViewHolder>() {
+class CarAdapter(private var carList: ArrayList<CarModel>, private val isAdmin: Boolean, private val listener: CarAdapterClickListener) : RecyclerView.Adapter<CarAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(CarRowBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
@@ -31,11 +32,17 @@ class CarAdapter(private var carList: ArrayList<CarModel>, private val listener:
                 containerView.modelTextView.text     = carModel
                 containerView.regNumberTextView.text = registrationNumber
 
-                containerView.hireCarButton.setOnClickListener {
-                    listener.onHireClicked(adapterPosition, carList[adapterPosition])
+                if (isAdmin){
+                    containerView.removeCarButton.setOnClickListener {
+                        listener.onDeleteClicked(adapterPosition)
+                    }
+                    containerView.hireCarButton.visibility = View.GONE
                 }
-                containerView.removeCarButton.setOnClickListener {
-                    listener.onDeleteClicked(adapterPosition)
+                else{
+                    containerView.hireCarButton.setOnClickListener {
+                        listener.onHireClicked(adapterPosition, carList[adapterPosition])
+                    }
+                    containerView.removeCarButton.visibility = View.GONE
                 }
             }
         }

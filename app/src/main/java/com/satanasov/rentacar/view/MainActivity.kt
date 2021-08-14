@@ -9,6 +9,7 @@ import com.satanasov.rentacar.adapter.CarAdapterClickListener
 import com.satanasov.rentacar.databinding.ActivityMainBinding
 import com.satanasov.rentacar.dialogs.AddCarCustomDialog
 import com.satanasov.rentacar.dialogs.HireCarCustomDialog
+import com.satanasov.rentacar.globalData.Utils.Companion.INTENT_TRANSFER_IS_ADMIN
 import com.satanasov.rentacar.models.CarModel
 import com.satanasov.rentacar.presenter.MainActivityPresenter
 import com.satanasov.rentacar.presenter.MainActivityView
@@ -21,15 +22,16 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter   = MainActivityPresenter(this)
+        presenter   = MainActivityPresenter(this, intent.getBooleanExtra(INTENT_TRANSFER_IS_ADMIN,false))
         binding     = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        init()
+        setCarAdapter(arrayListOf(), intent.getBooleanExtra(INTENT_TRANSFER_IS_ADMIN,false))
     }
 
     override fun onResume() {
         super.onResume()
         presenter.subscribe()
+        setForUser()
     }
 
     override fun onPause() {
@@ -42,13 +44,15 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
         super.onDestroy()
     }
 
-    private fun init(){
-        binding.addFloatingButtonMainActivity.setOnClickListener { showAddCarDialogDialog() }
-        setCarAdapter(arrayListOf())
+    private fun setForUser(){
+        if (presenter.isAdmin)
+            binding.addFloatingButtonMainActivity.setOnClickListener { showAddCarDialogDialog() }
+        else
+            binding.addFloatingButtonMainActivity.visibility = View.GONE
     }
 
-    private fun setCarAdapter(carModelList: ArrayList<CarModel>){
-        adapter = CarAdapter(carModelList, this)
+    private fun setCarAdapter(carModelList: ArrayList<CarModel>, isAdmin: Boolean){
+        adapter = CarAdapter(carModelList, isAdmin, this)
         binding.recyclerViewMainActivity.layoutManager  = LinearLayoutManager(this)
         binding.recyclerViewMainActivity.adapter        = adapter
     }
@@ -74,10 +78,6 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
             }
         })
         dialog.showDialog()
-    }
-
-    override fun setAdapter(carModelList: ArrayList<CarModel>) {
-        setCarAdapter(carModelList)
     }
 
     override fun updateList(carModelList: ArrayList<CarModel>) {

@@ -26,17 +26,13 @@ class AddCarCustomDialog(context: Context) : Dialog(context) {
             setContentView(binding.root)
             window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
 
-            binding.addCarCancelButton.setOnClickListener {
-                dismiss()
-            }
-
+            binding.addCarCancelButton.setOnClickListener { dismiss() }
             binding.addCarAddButton.setOnClickListener {
                 if( validate(binding) ){
-                    dialogListener?.onAddClicked(CarModel(carModel = binding.carModelEditText.text.toString(),registrationNumber = binding.regNumberEdit.text.toString()))
+                    dialogListener?.onAddClicked(CarModel(carModel = binding.carModelEditText.text.toString().trim(),registrationNumber = binding.regNumberEdit.text.toString().trim()))
                     dismiss()
                 }
             }
-
             show()
         } catch (e: Exception){
             e.printStackTrace()
@@ -55,7 +51,6 @@ class AddCarCustomDialog(context: Context) : Dialog(context) {
              binding.regNumberEdit.error = context.getString(R.string.please_enter_registration_number)
              valid = false
          }
-
         return valid
     }
 }

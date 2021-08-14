@@ -1,0 +1,23 @@
+CREATE TABLE user (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user_name   TEXT ,
+    password    TEXT ,
+    user_type   TEXT);
+
+GetAllUsers:
+    SELECT id, user_name, password, user_type
+    FROM   user;
+
+GetUserByUserName:
+    SELECT id, user_name, password, user_type
+    FROM   user
+    WHERE  user_name = ?;
+
+GetUserByUserNameAndPassword:
+    SELECT id, user_name, password, user_type
+    FROM   user
+    WHERE  user_name = ? AND password = ?;
+
+InsertUser:
+    INSERT INTO user(user_name, password, user_type)
+    VALUES (?, ?, ?);

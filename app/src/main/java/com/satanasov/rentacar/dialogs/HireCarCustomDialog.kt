@@ -25,10 +25,7 @@ class HireCarCustomDialog(context: Context) : Dialog(context) {
             setContentView(binding.root)
             window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
 
-            binding.addCarCancelButton.setOnClickListener {
-                dismiss()
-            }
-
+            binding.addCarCancelButton.setOnClickListener { dismiss() }
             binding.addCarAddButton.setOnClickListener {
                 if( validate(binding) ){
                     dialogListener?.onHireClicked(binding.minutesEditText.text.toString().toLong())
@@ -53,7 +50,6 @@ class HireCarCustomDialog(context: Context) : Dialog(context) {
                 binding.minutesEditText.error = context.getString(R.string.please_enter_values_greater)
                 valid = false
             }
-
         return valid
     }
 }

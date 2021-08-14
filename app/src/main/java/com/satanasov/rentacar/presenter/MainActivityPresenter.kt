@@ -5,16 +5,16 @@ import com.satanasov.rentacar.db.DataBaseQueries
 import com.satanasov.rentacar.models.CarModel
 import kotlin.collections.ArrayList
 
-class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<MainActivityView>() {
+class MainActivityPresenter(mainActivityView: MainActivityView, val isAdmin: Boolean) : BasePresenter<MainActivityView>() {
     var currentCarToHire                : CarModel              = CarModel()
 
     private var carModelList            : ArrayList<CarModel>   = ArrayList()
     private var dataBaseQueries         : DataBaseQueries       = DataBaseQueries()
-    private var mainActivityViewContext : MainActivityView
+    private var context                 : Context
 
     init {
         attachView(mainActivityView)
-        this.mainActivityViewContext = mainActivityView
+        this.context = mainActivityView as Context
     }
 
     override fun subscribe() {
@@ -26,13 +26,13 @@ class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<
     }
 
     fun insertCar(carModel: CarModel){
-        dataBaseQueries.insertCar(mainActivityViewContext as Context, carModel)
+        dataBaseQueries.insertCar(context, carModel)
         view?.updateList(getCarList())
     }
 
     private fun getCarList() : ArrayList<CarModel>{
         var carModel: CarModel
-        val carCursor   = dataBaseQueries.getCarList(mainActivityViewContext as Context)
+        val carCursor   = dataBaseQueries.getCarList(context)
 
         carModelList    = arrayListOf()
 
@@ -53,12 +53,12 @@ class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<
 
     fun hireCar(carModel: CarModel){
         carModel.rentedTill = carModel.currentTime?.plus(carModel.timeToBeRentedFor!! * MILLISECONDS)
-        dataBaseQueries.updateCar(mainActivityViewContext as Context, carModel)
+        dataBaseQueries.updateCar(context, carModel)
         view?.updateList(getCarList())
     }
 
     fun deleteCar(adapterPosition: Int){
-        dataBaseQueries.deleteCar(mainActivityViewContext as Context, carModelList[adapterPosition].id!!)
+        dataBaseQueries.deleteCar(context, carModelList[adapterPosition].id!!)
         carModelList = getCarList()
         view?.deleteCarModel(adapterPosition)
     }
@@ -82,7 +82,6 @@ class MainActivityPresenter(mainActivityView: MainActivityView) : BasePresenter<
     }
 }
 interface MainActivityView {
-    fun setAdapter(carModelList: ArrayList<CarModel>)
     fun updateList(carModelList: ArrayList<CarModel>)
     fun deleteCarModel(adapterPosition: Int)
     fun setNoCarsAddedText(show: Boolean)
