@@ -34,13 +34,13 @@ class CarAdapter(private var carList: ArrayList<CarModel>, private val isAdmin: 
 
                 if (isAdmin){
                     containerView.removeCarButton.setOnClickListener {
-                        listener.onDeleteClicked(adapterPosition)
+                        listener.onDeleteClicked(bindingAdapterPosition)
                     }
                     containerView.hireCarButton.visibility = View.GONE
                 }
                 else{
                     containerView.hireCarButton.setOnClickListener {
-                        listener.onHireClicked(adapterPosition, carList[adapterPosition])
+                        listener.onHireClicked(bindingAdapterPosition, carList[bindingAdapterPosition])
                     }
                     containerView.removeCarButton.visibility = View.GONE
                 }

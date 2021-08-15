@@ -23,6 +23,8 @@ class MainActivityPresenter(mainActivityView: MainActivityView, val isAdmin: Boo
 
         if (carModelList.isNotEmpty())
             view?.updateList(carModelList)
+
+        view?.setUserOrAdminView(isAdmin)
     }
 
     fun insertCar(carModel: CarModel){
@@ -85,4 +87,5 @@ interface MainActivityView {
     fun updateList(carModelList: ArrayList<CarModel>)
     fun deleteCarModel(adapterPosition: Int)
     fun setNoCarsAddedText(show: Boolean)
+    fun setUserOrAdminView(isAdmin: Boolean)
 }

@@ -31,7 +31,6 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
     override fun onResume() {
         super.onResume()
         presenter.subscribe()
-        setForUser()
     }
 
     override fun onPause() {
@@ -42,13 +41,6 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
     override fun onDestroy() {
         presenter.detachView()
         super.onDestroy()
-    }
-
-    private fun setForUser(){
-        if (presenter.isAdmin)
-            binding.addFloatingButtonMainActivity.setOnClickListener { showAddCarDialogDialog() }
-        else
-            binding.addFloatingButtonMainActivity.visibility = View.GONE
     }
 
     private fun setCarAdapter(carModelList: ArrayList<CarModel>, isAdmin: Boolean){
@@ -97,6 +89,13 @@ class MainActivity : BaseActivity(), MainActivityView, CarAdapterClickListener {
             binding.noCarsAdded.visibility                  = View.GONE
             binding.recyclerViewMainActivity.visibility     = View.VISIBLE
         }
+    }
+
+    override fun setUserOrAdminView(isAdmin: Boolean) {
+        if (isAdmin)
+            binding.addFloatingButtonMainActivity.setOnClickListener { showAddCarDialogDialog() }
+        else
+            binding.addFloatingButtonMainActivity.visibility = View.GONE
     }
 
     override fun onHireClicked(adapterPosition: Int, carModel: CarModel) {
