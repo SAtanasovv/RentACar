@@ -1,6 +1,7 @@
 package com.satanasov.rentacar.models
 /*TEST*/
 /*TEST*/
+/*TEST*/
 data class UserModel(
     val id          : Long?   = 0,
     val userName    : String? = "",
